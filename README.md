@@ -107,7 +107,7 @@ except when it doesn't. Here are a few things to keep in mind.
 	* the regex is applied to the absolute path
 	* a regex of `file.bin` does not work for the file `/Users/foobar/project/file.bin`
 	* use the regex `.*/file.bin` instead
- * resources can then be loaded as usual, e.g. via `clojure.java.io/resource`
+	* resources can then be loaded as usual, e.g. via `clojure.java.io/resource`
 
 * proxy classes (code gen in general)
   * JNR (and JNA) did not work because of JVM runtime code gen
@@ -140,7 +140,7 @@ except when it doesn't. Here are a few things to keep in mind.
   * would make GraalVM a dependency
   * better integration for callbacks?
   
-* when the program failes we return a non-zero exit code
+* when the program fails we return a non-zero exit code
   * **and** print the app-state as edn
   * we can then analyze that data in a Clojure REPL
   * starting the program with a debug flag, we can pass that data back into the program
