@@ -57,7 +57,7 @@ This project has been developed with *GraalVM Community Edition 1.0 RC6*.
 Compiling Clojure sources to native code works surprisingly well,
 except when it doesn't. Here are a few things to keep in mind.
 
-* make sure you compile all necessary Clojure file to class files
+* make sure you compile all necessary Clojure files to class files
   * remember to create the directory pointed to by `clojure.core/*compile-path*`
   * then use `clojure.core/compile` on namespace symbols
   * using the direct-linking option is a good idea
