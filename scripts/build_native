@@ -1,0 +1,3 @@
+#!/bin/bash
+
+clojure -Anative-image scripts/build_native.clj

@@ -1,0 +1,3 @@
+#!/bin/bash
+
+clojure scripts/build_js.clj

@@ -1,0 +1,14 @@
+[
+    {
+	"name" : "[Lcom.kenai.jffi.Type;",
+        "allDeclaredConstructors" : true
+    },
+    {
+	"name" : "clojure.lang.LineNumberingPushbackReader",
+	"methods" : [
+	    { "name" : "read" },
+	    { "name" : "unread" },
+	    { "name" : "readLine" }
+	]
+    }
+]
