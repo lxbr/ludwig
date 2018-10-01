@@ -19,6 +19,12 @@ not and likely will never be a replacement for
 [planck](https://github.com/planck-repl/planck) or 
 [lumo](https://github.com/anmonteiro/lumo).
 
+The path to JavaScriptCore and its headers is set in `deps.edn` of the
+[com.github.lxbr/jsc](https://github.com/lxbr/jsc)
+project. `Ludwig` works on macos out of the box
+but may work on other systems when the aforementioned paths are set appropriately.
+The name of the JavaScriptCore native library is hard coded as `JavaScriptCore`.
+
 ## Now, how do I run it?
 
 ### On the JVM
