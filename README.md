@@ -52,6 +52,13 @@ This project has been developed with *GraalVM Community Edition 1.0 RC6*.
 4. Then run `scripts/build_native`.
 5. After the scripts finished, call `./ludwig`.
 
+* Does compilation fail?
+  * Try uncommenting the `--report-unsupported-elements-at-runtime` flag in the `com.github.lxbr.ludwig.native-image` namespace.
+  * Compilation will take longer and the binary will be bigger.
+
+* Is macos asking you to install Java 6?
+  * Have a look at this: https://support.apple.com/kb/dl1572
+
 ## Clojure and GraalVM
 
 Compiling Clojure sources to native code works surprisingly well,
