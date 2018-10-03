@@ -2,7 +2,7 @@
  :deps  {org.clojure/clojurescript    {:mvn/version "1.10.339"}
          org.clojure/tools.deps.alpha {:mvn/version "0.5.452"}
          com.github.lxbr/jsc          {:git/url "https://github.com/lxbr/jsc.git"
-                                       :sha     "2a541f87b3a88162c185575b15ec2f3bfcfac880"}}
+                                       :sha     "fb5f20a4fcd550736822d5c8ae506f6300f6c526"}}
  :aliases
  {:native-image {:override-deps
                  {org.clojure/tools.reader
