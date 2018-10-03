@@ -20,6 +20,7 @@
                    "clojure.tools.reader"}]
     (binding [*compiler-options* {:direct-linking true}]
       (print "AOT compiling Clojure sources...")
+      (flush)
       (->> (all-ns)
            (map (comp name ns-name))
            (filter #(some (fn [^String prefix] (.startsWith % prefix)) prefixes))
