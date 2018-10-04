@@ -2,9 +2,20 @@
  :deps  {org.clojure/clojurescript    {:mvn/version "1.10.339"}
          org.clojure/tools.deps.alpha {:mvn/version "0.5.452"}
          com.github.lxbr/jsc          {:git/url "https://github.com/lxbr/jsc.git"
-                                       :sha     "802d67d4655e9143297559d8dab8d747b3695ca2"}}
+                                       :sha     "5f2911032c7bc21080719291fe136a67bc5e2f4f"}}
  :aliases
  {:native-image {:override-deps
                  {org.clojure/tools.reader
                   {:git/url "https://github.com/lxbr/tools.reader"
-                   :sha     "bcdeec6d32feecc7f2c50f3f8b2f07b466e6c26f"}}}}}
+                   :sha     "bcdeec6d32feecc7f2c50f3f8b2f07b466e6c26f"}}}}
+
+ :ludwig/headers-path
+ "/System/Library/Frameworks/JavaScriptCore.framework/Headers"
+
+ :ludwig/lib-path
+ "/System/Library/Frameworks/JavaScriptCore.framework/JavaScriptCore"
+
+ ;; choose the appropriate resource from
+ ;; jar -tf ~/.m2/repository/com/github/jnr/jffi/1.2.17/jffi-1.2.17-native.jar
+ :ludwig/libjffi-resource
+ "jni/Darwin/libjffi-1.2.jnilib"}

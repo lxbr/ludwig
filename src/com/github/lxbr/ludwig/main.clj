@@ -4,24 +4,48 @@
             [clojure.java.io :as io]
             [clojure.tools.reader :as reader]
             [clojure.tools.reader.reader-types :as reader-types]
-            [cljs.tagged-literals])
+            [cljs.tagged-literals]
+            [clojure.edn]
+            [clojure.string])
   (:import clojure.lang.LineNumberingPushbackReader
-           java.util.zip.GZIPInputStream)
+           java.util.zip.GZIPInputStream
+           java.io.File)
   (:gen-class
    :name com.github.lxbr.ludwig.Main))
 
 (set! *warn-on-reflection* true)
+
+(def libjffi-path
+  (-> (io/resource "deps.edn")
+      (slurp)
+      (clojure.edn/read-string)
+      (:ludwig/libjffi-resource)))
+
+(defn load-libjffi!
+  []
+  (let [suffix (subs libjffi-path (clojure.string/last-index-of libjffi-path "."))
+        tmp (File/createTempFile "libjffi-1.2" suffix)]
+    (.deleteOnExit tmp)
+    (with-open [is (io/input-stream (io/resource libjffi-path))]
+      (io/copy is tmp))
+    (System/load (.getAbsolutePath tmp))))
+
+(def lib-path
+  (-> (io/resource "deps.edn")
+      (slurp)
+      (clojure.edn/read-string)
+      (:ludwig/lib-path)))
 
 (defn repl-init
   []
   (println "Enter :cljs/quit to exit the REPL"))
 
 (defn repl-eval
-  [ctx string]
+  [lib ctx string]
   (let [escaped-string (pr-str string)]
     (->> (str "com.github.lxbr.ludwig.eval_str(" escaped-string ")")
-         (jsc/eval-script ctx)
-         (jsc/value-to-string ctx))))
+         (jsc/eval-script lib ctx)
+         (jsc/value-to-string lib ctx))))
 
 (defn repl-read
   [request-prompt request-exit]
@@ -100,17 +124,21 @@
 
 (defn -main
   [& args]
-  (jsc/load-libjffi!)
-  (let [init-script (with-open [is (-> (io/resource "out/ludwig.js.gz")
+  (load-libjffi!)
+  (let [lib (com.kenai.jffi.Library/openLibrary
+             lib-path
+             (bit-or com.kenai.jffi.Library/LOCAL
+                     com.kenai.jffi.Library/LAZY))
+        init-script (with-open [is (-> (io/resource "out/ludwig.js.gz")
                                        (io/input-stream))
                                 gzis (GZIPInputStream. is)]
                       (slurp gzis))
-        ctx (jsc/create-context)]
-    (jsc/eval-script ctx init-script)
+        ctx (jsc/create-context lib)]
+    (jsc/eval-script lib ctx init-script)
     (repl
      {:init repl-init
       :prompt repl-prompt
-      :eval (fn [value] (repl-eval ctx value))
+      :eval (fn [value] (repl-eval lib ctx value))
       :read repl-read
       :caught repl-caught
       :print repl-print})))

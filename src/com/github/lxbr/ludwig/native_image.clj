@@ -4,6 +4,7 @@
             [clojure.java.shell :as sh]
             [clojure.tools.reader]
             [clojure.tools.deps.alpha :as deps]
+            [clojure.edn]
             [com.github.lxbr.jsc]
             [com.github.lxbr.ludwig.engine]
             [com.github.lxbr.ludwig.main])
@@ -17,6 +18,7 @@
                    "com.github.lxbr.effing"
                    "com.github.lxbr.ludwig.main"
                    "com.github.lxbr.ludwig.engine"
+                   "com.github.lxbr.ludwig.internal.jsc"
                    "clojure.tools.reader"}]
     (binding [*compiler-options* {:direct-linking true}]
       (print "AOT compiling Clojure sources...")
@@ -33,6 +35,10 @@
                                                           :classifier  ["" "native"]}}}
                       (deps/resolve-deps nil)
                       (deps/make-classpath [*compile-path* "."] nil))
+        libjffi-path (-> (io/resource "deps.edn")
+                         (slurp)
+                         (clojure.edn/read-string)
+                         (:ludwig/libjffi-resource))
         {:keys [out err exit]}
         (sh/sh (str graal-home-path File/separator "bin/native-image")
                "--no-server"
@@ -41,7 +47,7 @@
                "-H:Name=ludwig"
                "-H:+JNI"
                "-H:ReflectionConfigurationFiles=graal/reflect.json"
-               "-H:IncludeResources=(.*/out/ludwig.js.gz)|(jni/Darwin/libjffi-1.2.jnilib)"
+               (format "-H:IncludeResources=(.*/out/ludwig.js.gz)|(%s)" libjffi-path)
                "-cp" classpath
                "com.github.lxbr.ludwig.Main")]
     (if (zero? exit)
