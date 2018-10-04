@@ -14,7 +14,7 @@
   [graal-home-path]
   (println "Graal Home at" graal-home-path)
   (.mkdirs (io/file *compile-path*))
-  (let [prefixes #{"com.github.lxbr.jsc"
+  (let [prefixes #{"com.github.lxbr.jsc.util"
                    "com.github.lxbr.effing"
                    "com.github.lxbr.ludwig.main"
                    "com.github.lxbr.ludwig.engine"
