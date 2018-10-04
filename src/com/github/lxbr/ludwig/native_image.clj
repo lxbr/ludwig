@@ -5,7 +5,7 @@
             [clojure.tools.reader]
             [clojure.tools.deps.alpha :as deps]
             [clojure.edn]
-            [com.github.lxbr.jsc]
+            [com.github.lxbr.jsc.util]
             [com.github.lxbr.ludwig.engine]
             [com.github.lxbr.ludwig.main])
   (:import java.io.File))
