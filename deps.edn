@@ -1,8 +1,9 @@
 {:paths ["src" "."]
- :deps  {org.clojure/clojurescript    {:mvn/version "1.10.339"}
-         org.clojure/tools.deps.alpha {:mvn/version "0.5.452"}
+ :deps  {org.clojure/clojure          {:mvn/version "1.9.0"}
+         org.clojure/clojurescript    {:mvn/version "1.10.339"}
+         org.clojure/tools.deps.alpha {:mvn/version "0.6.474"}
          com.github.lxbr/jsc          {:git/url "https://github.com/lxbr/jsc.git"
-                                       :sha     "5f2911032c7bc21080719291fe136a67bc5e2f4f"}}
+                                       :sha     "4ddee93ed9c520d39961345a715bbd6df10a3aa4"}}
  :aliases
  {:native-image {:override-deps
                  {org.clojure/tools.reader

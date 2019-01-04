@@ -29,10 +29,10 @@
            (run! (comp compile symbol)))
       (println "DONE")))
   (println "Starting native build...")
-  (let [classpath (-> '{:deps {org.clojure/clojure       {:mvn/version "1.9.0"}
-                               org.clojure/clojurescript {:mvn/version "1.10.339"}
-                               com.github.jnr/jffi       {:mvn/version "1.2.17"
-                                                          :classifier  ["" "native"]}}}
+  (let [classpath (-> '{:deps {org.clojure/clojure        {:mvn/version "1.9.0"}
+                               org.clojure/clojurescript  {:mvn/version "1.10.339"}
+                               com.github.jnr/jffi        {:mvn/version "1.2.17"}
+                               com.github.jnr/jffi$native {:mvn/version "1.2.17"}}}
                       (deps/resolve-deps nil)
                       (deps/make-classpath [*compile-path* "."] nil))
         libjffi-path (-> (io/resource "deps.edn")
