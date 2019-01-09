@@ -3,12 +3,13 @@
          org.clojure/clojurescript    {:mvn/version "1.10.339"}
          org.clojure/tools.deps.alpha {:mvn/version "0.6.474"}
          com.github.lxbr/jsc          {:git/url "https://github.com/lxbr/jsc.git"
-                                       :sha     "4ddee93ed9c520d39961345a715bbd6df10a3aa4"}}
+                                       :sha     "4c018f9dc8db1bdae92a4cf3dcb6753db7dae20b"}}
  :aliases
  {:native-image {:override-deps
                  {org.clojure/tools.reader
                   {:git/url "https://github.com/lxbr/tools.reader"
-                   :sha     "bcdeec6d32feecc7f2c50f3f8b2f07b466e6c26f"}}}}
+                   :sha     "bcdeec6d32feecc7f2c50f3f8b2f07b466e6c26f"}}}
+  :local {:override-deps {com.github.lxbr/jsc {:local/root "../jsc"}}}}
 
  :ludwig/headers-path
  "/System/Library/Frameworks/JavaScriptCore.framework/Headers"
